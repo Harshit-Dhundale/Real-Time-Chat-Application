@@ -1,7 +1,6 @@
 # Real-Time Chat Application (Backend System)
 
 ![Application Preview](./home.jpg)
-
 ![Backend Logging](./logging.jpg)
 
 A WebSocket-based real-time chat backend system with offline message buffering, built with Node.js, Express, and WebSocket. This system enables seamless messaging between users with guaranteed message delivery and ordering, even during disconnections.
@@ -45,7 +44,7 @@ Design and implement a minimal real-time chat backend that enables two users to 
 
 ## 🏗️ System Architecture
 
-\`\`\`
+```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
 │   WebSocket     │    │   In-Memory      │    │   REST API      │
 │   Server        │◄──►│   Storage        │◄──►│   Server        │
@@ -53,7 +52,7 @@ Design and implement a minimal real-time chat backend that enables two users to 
 │                 │    │   - messageQueue │    │                 │
 │                 │    │   - connections  │    │                 │
 └─────────────────┘    └──────────────────┘    └─────────────────┘
-\`\`\`
+```
 
 ### Data Structures
 - **`chatHistory`**: Map<string, Message[]> - Stores all messages by chat key
@@ -70,31 +69,31 @@ Design and implement a minimal real-time chat backend that enables two users to 
 ### Installation
 
 1. **Clone the repository**
-   \`\`\`bash
+   ```bash
    git clone https://github.com/Harshit-Dhundale/Real-Time-Chat-Application.git
    cd realtime-chat
-   \`\`\`
+   ```
 
 2. **Install dependencies**
-   \`\`\`bash
+   ```bash
    npm install
-   \`\`\`
+   ```
 
 3. **Start the backend server**
-   \`\`\`bash
+   ```bash
    npm run backend
-   \`\`\`
+   ```
    You should see:
-   \`\`\`
+   ```
    ✅ Server running on http://localhost:8080
    📡 WebSocket server ready for connections
    🎯 API available at http://localhost:8080/api
-   \`\`\`
+   ```
 
 4. **Start the frontend (in a new terminal)**
-   \`\`\`bash
+   ```bash
    npm run dev
-   \`\`\`
+   ```
    Frontend will be available at: http://localhost:3000
 
 ## 📋 Usage Instructions
@@ -115,23 +114,23 @@ Design and implement a minimal real-time chat backend that enables two users to 
 ### 1. Real-Time Chat Between Two Users
 
 **Step 1: Connect User A**
-\`\`\`bash
+```bash
 # Open browser tab 1: http://localhost:3000
 # Username: Harshit
 # Click "Connect"
 # Expected log: "📡 Harshit connected"
-\`\`\`
+```
 
 **Step 2: Connect User B**
-\`\`\`bash
+```bash
 # Open browser tab 2: http://localhost:3000
 # Username: Nikhil
 # Click "Connect"
 # Expected log: "📡 Nikhil connected"
-\`\`\`
+```
 
 **Step 3: Send Messages**
-\`\`\`bash
+```bash
 # In Harshit's tab:
 # Recipient: Nikhil
 # Message: "Hello Nikhil!"
@@ -144,28 +143,28 @@ Design and implement a minimal real-time chat backend that enables two users to 
 # Message: "Hi Harshit!"
 # Click Send
 # Expected: Message appears instantly in Harshit's "Messages" section
-\`\`\`
+```
 
 ### 2. Disconnection and Reconnection Scenario
 
 **Step 1: Disconnect User B**
-\`\`\`bash
+```bash
 # In Nikhil's tab, click "Disconnect"
 # Expected log: "🚫 Nikhil disconnected"
-\`\`\`
+```
 
 **Step 2: Send Messages to Offline User**
-\`\`\`bash
+```bash
 # In Harshit's tab:
 # Send message: "Are you there?"
 # Send message: "This is message 2"
 # Expected logs: 
 # "📦 Buffered message for Nikhil"
 # "📦 Buffered message for Nikhil"
-\`\`\`
+```
 
 **Step 3: Reconnect User B**
-\`\`\`bash
+```bash
 # In Nikhil's tab:
 # Username: Nikhil
 # Click "Connect"
@@ -173,22 +172,22 @@ Design and implement a minimal real-time chat backend that enables two users to 
 # "📡 Nikhil connected"
 # "🚚 Delivered 2 buffered messages to Nikhil"
 # Expected: Both messages appear in Nikhil's interface in correct order
-\`\`\`
+```
 
 ### 3. Chat History Retrieval via REST
 
 **Method 1: Using the Frontend**
-\`\`\`bash
+```bash
 # In any browser tab:
 # Go to "Chat History" section
 # User 1: Harshit
 # User 2: Nikhil
 # Click "Fetch"
 # Expected: All messages between Harshit and Nikhil appear chronologically
-\`\`\`
+```
 
 **Method 2: Direct API Call**
-\`\`\`bash
+```bash
 # Using curl:
 curl "http://localhost:8080/api/messages?user1=Harshit&user2=Nikhil"
 
@@ -212,40 +211,40 @@ curl "http://localhost:8080/api/messages?user1=Harshit&user2=Nikhil"
     }
   ]
 }
-\`\`\`
+```
 
 **Method 3: Using Browser**
-\`\`\`bash
+```bash
 # Open: http://localhost:8080/api/messages?user1=Harshit&user2=Nikhil
 # View JSON response in browser
-\`\`\`
+```
 
 ## 🔍 Testing Scenarios
 
 ### Scenario 1: Message Ordering Test
-\`\`\`bash
+```bash
 1. Connect Harshit and Nikhil
 2. Disconnect Nikhil
 3. Harshit sends: "Message 1", "Message 2", "Message 3"
 4. Reconnect Nikhil
 5. Verify Nikhil receives all messages in order: 1, 2, 3
-\`\`\`
+```
 
 ### Scenario 2: Concurrent Users Test
-\`\`\`bash
+```bash
 1. Connect multiple users: Harshit, Nikhil, Charlie
 2. Send messages between different pairs
 3. Verify each user only receives their intended messages
 4. Check chat history for each pair is separate
-\`\`\`
+```
 
 ### Scenario 3: Server Restart Test
-\`\`\`bash
+```bash
 1. Connect users and send messages
 2. Restart backend server (Ctrl+C, then npm run backend)
 3. Note: In-memory data is lost (as per requirements)
 4. Reconnect users and verify fresh start
-\`\`\`
+```
 
 ## 📊 API Endpoints
 
@@ -253,13 +252,13 @@ curl "http://localhost:8080/api/messages?user1=Harshit&user2=Nikhil"
 - **URL**: `ws://localhost:8080?userId=USERNAME`
 - **Protocol**: WebSocket
 - **Message Format**:
-  \`\`\`json
+  ```json
   {
     "type": "chat",
     "to": "recipient_username",
     "content": "message content"
   }
-  \`\`\`
+  ```
 
 ### REST API
 - **GET** `/api/messages?user1=A&user2=B` - Get chat history
@@ -286,7 +285,7 @@ The system provides comprehensive logging for all key events:
 
 ## 🏃‍♂️ Quick Start Commands
 
-\`\`\`bash
+```bash
 # Install dependencies
 npm install
 
@@ -298,7 +297,7 @@ npm run dev
 
 # Start backend with auto-reload (development)
 npm run backend:dev
-\`\`\`
+```
 
 ## 🧪 Testing the System
 
@@ -317,7 +316,7 @@ npm run backend:dev
 
 ## 📁 Project Structure
 
-\`\`\`
+```
 realtime-chat/
 ├── src/backend/
 │   ├── server.js          # Main server entry point
@@ -330,8 +329,8 @@ realtime-chat/
 ├── scripts/
 │   └── dev-setup.js       # Development setup script
 ├── package.json           # Dependencies and scripts
-└── README.md             # This file
-\`\`\`
+└── README.md              # This file
+```
 
 ## 🎯 Success Criteria Met
 
