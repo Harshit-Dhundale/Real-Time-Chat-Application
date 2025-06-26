@@ -10,10 +10,10 @@ A WebSocket-based real-time chat backend system with offline message buffering, 
 
 Design and implement a minimal real-time chat backend that enables two users to exchange messages via WebSocket connections, supporting both real-time messaging and offline message delivery for a seamless user experience.
 
-## 🎥 Demo Video
+## 🎥 Demo Video  
+[![Watch the Real-Time Chat App Demo Here](https://img.youtube.com/vi/a1DkqtqWmPg/0.jpg)](https://youtu.be/a1DkqtqWmPg)
 
-Watch the full demo here: [▶️ Real-Time Chat App Demo](https://youtu.be/a1DkqtqWmPg)
-
+---
 
 ## 🔧 Functional Requirements Implementation
 
